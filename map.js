@@ -68,8 +68,22 @@ map.on("load", () => {
   map.on("click", "org-pins", (e) => {
     const feature = e.features[0];
 
-    const orgId = feature.properties.org_id;
-    console.log("clicked org:", orgId, window.orgCoverage[orgId]);
+const orgId = feature.properties.org_id;
+const coverage = window.orgCoverage[orgId];
+
+console.log("clicked org:", orgId, coverage);
+
+// highlight counties
+map.setFilter(
+  "counties-coverage-fill",
+  ["in", ["get", "GEOID"], ["literal", coverage.countyIds]]
+);
+
+// highlight states
+map.setFilter(
+  "states-coverage-fill",
+  ["in", ["get", "STATEFP"], ["literal", coverage.stateIds]]
+);
 
     const coordinates = feature.geometry.coordinates.slice();
     const name = feature.properties.name;
