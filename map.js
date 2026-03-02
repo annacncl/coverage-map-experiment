@@ -29,18 +29,19 @@ map.on("load", () => {
   });
 
   // 👇 ADD THIS PART
-  map.on("click", "org-pins", (e) => {
+map.on("click", "org-pins", (e) => {
+  const feature = e.features[0];
 
-    const feature = e.features[0];
+  const orgId = feature.properties.org_id;
+  console.log("clicked org:", orgId, window.orgCoverage[orgId]);
 
-    const coordinates = feature.geometry.coordinates.slice();
-    const name = feature.properties.name;
+  const coordinates = feature.geometry.coordinates.slice();
+  const name = feature.properties.name;
 
-    new mapboxgl.Popup()
-      .setLngLat(coordinates)
-      .setHTML(`<strong>${name}</strong>`)
-      .addTo(map);
-
-  });
+  new mapboxgl.Popup()
+    .setLngLat(coordinates)
+    .setHTML(`<strong>${name}</strong>`)
+    .addTo(map);
+});
 
 });
