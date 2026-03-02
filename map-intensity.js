@@ -92,16 +92,19 @@ map.on("load", async () => {
   // We then keep updating once after we fit bounds to a national-ish view.
   // For a prototype with a small org set, this is totally fine.
 
-  // Zoom out so counties load broadly (US-ish). You can adjust.
-  map.jumpTo({ center: [-98, 39], zoom: 3 });
+map.jumpTo({ center: [-98, 39], zoom: 3 });
 
-  // Wait a tick for tiles to load
-  await new Promise((r) => setTimeout(r, 800));
+// Wait until all tiles/layers are fully loaded
+await new Promise((resolve) => {
+  map.once("idle", resolve);
+});
 
-  // Get county features currently loaded
-  const features = map.querySourceFeatures("counties", {
-    sourceLayer: "counties-ne-7yxrvw"
-  });
+// Now query loaded county features
+const features = map.querySourceFeatures("counties", {
+  sourceLayer: "counties-ne-7yxrvw"
+});
+
+console.log("Loaded county features:", features.length);
 
   // Build GeoJSON from just the counties that appear in countsByCounty
   const covered = [];
