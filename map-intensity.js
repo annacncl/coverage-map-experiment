@@ -53,6 +53,17 @@ map.on("load", async () => {
     url: "mapbox://annacorn.7573wevu"
   });
 
+  map.addLayer({
+  id: "counties-debug-outline",
+  type: "line",
+  source: "counties",
+  "source-layer": "counties-ne-7yxrvw",
+  paint: {
+    "line-color": "rgba(255,0,0,0.6)",
+    "line-width": 0.5
+  }
+});
+
   map.addSource("states", {
     type: "vector",
     url: "mapbox://annacorn.43if3v19"
