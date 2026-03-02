@@ -3,10 +3,29 @@ mapboxgl.accessToken = "pk.eyJ1IjoiYW5uYWNvcm4iLCJhIjoiY21oZzR0d2N1MGJrZzJrczd3Y
 const map = new mapboxgl.Map({
   container: "map",
   style: "mapbox://styles/mapbox/light-v11",
-  center: [-71.1, 42.36], // Boston
+  center: [-71.1, 42.36],
   zoom: 5
 });
 
 map.on("load", () => {
-  console.log("Map loaded successfully");
+
+  // load org locations
+  map.addSource("orgs", {
+    type: "geojson",
+    data: "./data/orgs.geojson"
+  });
+
+  // draw org pins
+  map.addLayer({
+    id: "org-pins",
+    type: "circle",
+    source: "orgs",
+    paint: {
+      "circle-radius": 6,
+      "circle-color": "#2c7be5",
+      "circle-stroke-width": 1,
+      "circle-stroke-color": "#ffffff"
+    }
+  });
+
 });
