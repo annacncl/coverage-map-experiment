@@ -1,0 +1,20 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "org_id": "org_001", "name": "Regional Alliance" },
+      "geometry": { "type": "Point", "coordinates": [-71.05, 42.36] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "org_id": "org_002", "name": "Middlesex Focus" },
+      "geometry": { "type": "Point", "coordinates": [-71.105, 42.36] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "org_id": "org_003", "name": "Multi-State Organization" },
+      "geometry": { "type": "Point", "coordinates": [-71.11, 42.41] }
+    }
+  ]
+}
